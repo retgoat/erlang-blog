@@ -1,0 +1,3 @@
+-define (JSON_H, "application/json; charset=utf-8").
+-define (HTML_H, "text/html").
+-define (TEXT_H, "text/plain").

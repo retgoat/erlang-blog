@@ -1,0 +1,9 @@
+%% -*- erlang -*-
+{application, erlblog,
+ [{description, "erlblog"},
+  {vsn, "0.1"},
+  {modules, []},
+  {registered, []},
+  {mod, {'erlblog_app', []}},
+  {env, []},
+  {applications, [kernel, stdlib, crypto]}]}.
