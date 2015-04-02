@@ -36,6 +36,10 @@ loop(Req, DocRoot) ->
         end;
       'POST' ->
         case Path of
+          "posts" ->
+            Data = Req:recv_body(),
+            Response = posts:create_new_post(Data),
+            Req:respond({200, [{"Content-Type", ?JSON_H}], Response});
           _ ->
             Req:not_found()
           end;
