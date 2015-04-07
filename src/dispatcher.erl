@@ -18,7 +18,6 @@ dispatch(Req, [{Regexp, Handler}|T]) ->
         Length when Length > 0 ->
           Args = lists:flatten(MatchList),
           Action = convert_method_to_action(Method),
-          error_logger:error_report(["Handler, Action and Args", {hand, Handler}, {act, Action}, {args_, Args}, {matchlist, MatchList}]),
           Handler:Action(Req, Args)
       end;
     _ ->

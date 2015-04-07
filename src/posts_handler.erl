@@ -20,6 +20,18 @@ post(Req, _) ->
   {json, {struct, Resp}} = erlang_couchdb:create_document(?DB_HOST, ?DB_POSTS_DATABASE, {struct, JSON}),
   respond_with_json(Req, Resp).
 
+put(Req, Doc_id) ->
+  Data = Req:recv_body(),
+  {struct, JSON} = mochijson2:decode(Data),
+  {json, {struct, Resp}} = erlang_couchdb:update_document(?DB_HOST, ?DB_POSTS_DATABASE, Doc_id, {struct, JSON}),
+  respond_with_json(Req, Resp).
+
+delete(Req, Doc_id) ->
+  Data = Req:recv_body(),
+  {struct, Json} = mochijson2:decode(Data),
+  Rev_id = proplists:get_value(<<"rev">>, Json, null),
+  {json, {struct, Resp}} = erlang_couchdb:delete_document(?DB_HOST, ?DB_POSTS_DATABASE, Doc_id, Rev_id),
+  respond_with_json(Req, Resp).
 
 % JSON Responder
 respond_with_json(Req, Data) ->
