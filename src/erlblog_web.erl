@@ -36,7 +36,7 @@ loop(Req, DocRoot) ->
         {type, Type}, {what, What},
         {trace, erlang:get_stacktrace()}],
       error_logger:error_report(Report),
-    Req:respond({500, [{"Content-Type", ?TEXT_H}], "request failed, sorry\n"})
+    Req:respond({500, [{"Content-Type", ?JSON_H}], list_to_binary(mochijson2:encode([{"code", 500}, {"message", <<"request failed">>}]))})
   end.
 
 %% Internal API
